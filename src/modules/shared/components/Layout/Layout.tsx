@@ -12,7 +12,10 @@ const Layout = () => {
       minHeight="100vh"
     >
       <Header />
-      <Container component="main" sx={{ flex: 1 }}>
+      <Container
+        component="main"
+        sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+      >
         <Outlet />
       </Container>
       <Footer />

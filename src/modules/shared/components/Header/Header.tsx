@@ -125,6 +125,8 @@ function Header() {
             ))}
           </Box>
 
+          <IconButton color="secondary" aria-label="add an alarm"></IconButton>
+
           {auth ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">

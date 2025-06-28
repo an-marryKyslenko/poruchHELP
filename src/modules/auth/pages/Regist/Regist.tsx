@@ -11,12 +11,17 @@ import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
 import { Card } from '../../components/Card/Card';
 import { GoogleIcon } from '../../components/GoogleIcon/GoogleIcon';
 import FieldInput from '../../components/FieldInput/FieldInput';
+import { useMutation } from '@tanstack/react-query';
+import { authAPI } from '../../services/auth';
 
 const Regist = () => {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [nameErrorMessage, setNameErrorMessage] = useState('');
-
+  const mutation = useMutation({
+    mutationFn: authAPI.regist,
+    onSuccess: () => {},
+  });
   const validateInputs = (name: string, email: string, password: string) => {
     let isValid = true;
 
@@ -57,6 +62,12 @@ const Regist = () => {
     if (!validateInputs(name, email, password)) {
       return;
     }
+
+    mutation.mutate({
+      email,
+      name,
+      password,
+    });
 
     form.reset();
   };

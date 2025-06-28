@@ -10,9 +10,11 @@ export const getTheme = (mode: 'light' | 'dark') =>
       background: {
         default: mode === 'light' ? '#EAF4FC' : '#121212',
         paper: mode === 'light' ? '#ffffff' : '#1e1e1e',
+        hover: '#F9FAFB',
       },
       text: {
-        primary: mode === 'light' ? '#1a1a1a' : '#ffffff',
+        primary: mode === 'light' ? '#1E293B' : '#ffffff',
+        secondary: mode === 'light' ? '#64748B' : '#ffffff',
       },
     },
     shape: {

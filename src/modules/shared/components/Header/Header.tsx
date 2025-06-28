@@ -11,16 +11,20 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import { useColorMode } from '../../context/ColorModeContext';
 
 const pages = ['Stories', 'Blog', 'Add story'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Header() {
+  const { mode, toggleColorMode } = useColorMode();
   const [auth, setAuth] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -125,7 +129,9 @@ function Header() {
             ))}
           </Box>
 
-          <IconButton color="secondary" aria-label="add an alarm"></IconButton>
+          <IconButton aria-label="add an alarm" onClick={toggleColorMode}>
+            {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+          </IconButton>
 
           {auth ? (
             <Box sx={{ flexGrow: 0 }}>

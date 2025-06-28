@@ -72,7 +72,7 @@ const Login = () => {
             error={emailErrorMessage}
             fieldName="email"
             label="Email"
-            pHolder="Jone Snow"
+            pHolder="john@example.com"
           />
 
           <FieldInput
@@ -98,7 +98,7 @@ const Login = () => {
             onClick={() => {}}
             startIcon={<GoogleIcon />}
           >
-            Sign up with Google
+            Log in with Google
           </Button>
         </Box>
       </Card>

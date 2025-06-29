@@ -122,7 +122,7 @@ const Stories = () => {
             borderRadius: 5,
             mb: 2,
             width: '100%',
-            backgroundColor: '#eee',
+            backgroundColor: '#a0c4fd',
             '& .MuiLinearProgress-bar': {
               backgroundColor: '#1976d2',
             },

@@ -122,9 +122,9 @@ const Stories = () => {
             borderRadius: 5,
             mb: 2,
             width: '100%',
-            backgroundColor: '#eee', // 👈 додаємо фон
+            backgroundColor: '#eee',
             '& .MuiLinearProgress-bar': {
-              backgroundColor: '#1976d2', // або свій колір
+              backgroundColor: '#1976d2',
             },
           }}
         />

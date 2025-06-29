@@ -13,10 +13,9 @@ const Login = () => {
   const mutation = useMutation({
     mutationFn: authAPI.login,
     onSuccess: data => {
-      const {token} = data;
+      const { token } = data;
 
       localStorage.setItem('accessToken', token);
-
     },
   });
 

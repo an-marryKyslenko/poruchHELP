@@ -1,9 +1,9 @@
 import { Box, Button } from '@mui/material';
 
-const pages = ['Catalog ', 'Blog', 'Add story'];
+const pages = ['Catalog', 'Blog', 'Add story'];
 
 type Props = {
-  onCloseMenu: () => void;
+  onCloseMenu?: () => void;
 };
 const NavMenu = ({ onCloseMenu }: Props) => {
   return (

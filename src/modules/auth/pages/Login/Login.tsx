@@ -4,10 +4,21 @@ import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
 import { Card } from '../../components/Card/Card';
 import { GoogleIcon } from '../../components/GoogleIcon/GoogleIcon';
 import FieldInput from '../../components/FieldInput/FieldInput';
+import { useMutation } from '@tanstack/react-query';
+import { authAPI } from '../../services/auth';
 
 const Login = () => {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const mutation = useMutation({
+    mutationFn: authAPI.login,
+    onSuccess: data => {
+      const {token} = data;
+
+      localStorage.setItem('accessToken', token);
+
+    },
+  });
 
   const validateInputs = (email: string, password: string) => {
     let isValid = true;
@@ -41,6 +52,11 @@ const Login = () => {
     if (!validateInputs(email, password)) {
       return;
     }
+
+    mutation.mutate({
+      email,
+      password,
+    });
 
     form.reset();
   };
@@ -80,6 +96,7 @@ const Login = () => {
             fieldName="password"
             label="Password"
             pHolder="••••••"
+            type="password"
           />
 
           <Button type="submit" fullWidth variant="contained">

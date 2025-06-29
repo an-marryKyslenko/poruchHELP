@@ -6,8 +6,15 @@ type Props = {
   fieldName: string;
   label: string;
   pHolder: string;
+  type?: 'text' | 'password';
 };
-const FieldInput = ({ error, fieldName, label, pHolder }: Props) => {
+const FieldInput = ({
+  error,
+  fieldName,
+  label,
+  pHolder,
+  type = 'text',
+}: Props) => {
   return (
     <FormControl>
       <FormLabel htmlFor={fieldName}>{label}</FormLabel>
@@ -20,6 +27,7 @@ const FieldInput = ({ error, fieldName, label, pHolder }: Props) => {
         placeholder={pHolder}
         error={!!error}
         helperText={error}
+        type={type}
         color={error ? 'error' : 'primary'}
       />
     </FormControl>

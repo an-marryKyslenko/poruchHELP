@@ -2,13 +2,13 @@ import axios from 'axios';
 
 const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 const accessToken = localStorage.getItem('accessToken') || '';
 
 API.interceptors.request.use(config => {
-  const newConfig = {...config};
+  const newConfig = { ...config };
 
   if (accessToken) {
     newConfig.headers.Authorization = `Bearer ${accessToken}`;

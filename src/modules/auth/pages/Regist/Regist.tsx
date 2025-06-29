@@ -4,6 +4,7 @@ import {
   Checkbox,
   Divider,
   FormControlLabel,
+  Stack,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
@@ -22,7 +23,14 @@ const Regist = () => {
     mutationFn: authAPI.regist,
     onSuccess: () => {},
   });
-  const validateInputs = (name: string, email: string, password: string) => {
+
+  const validateInputs = (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    repeatPassword: string,
+  ) => {
     let isValid = true;
 
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
@@ -39,8 +47,22 @@ const Regist = () => {
       setPasswordErrorMessage('');
     }
 
-    if (!name || name.length < 1) {
-      setNameErrorMessage('Name is required.');
+    if (password !== repeatPassword) {
+      setPasswordErrorMessage('Password must match with repeat password');
+      isValid = false;
+    } else {
+      setPasswordErrorMessage('');
+    }
+
+    if (!firstName || firstName.length < 1) {
+      setNameErrorMessage('First name is required.');
+      isValid = false;
+    } else {
+      setNameErrorMessage('');
+    }
+
+    if (!lastName || lastName.length < 1) {
+      setNameErrorMessage('Last name is required.');
       isValid = false;
     } else {
       setNameErrorMessage('');
@@ -55,21 +77,25 @@ const Regist = () => {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const name = formData.get('name') as string;
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
     const password = formData.get('password') as string;
+    const repeatPassword = formData.get('repeatPassword') as string;
     const email = formData.get('email') as string;
 
-    if (!validateInputs(name, email, password)) {
+    if (!validateInputs(firstName, lastName, email, password, repeatPassword)) {
       return;
     }
 
     mutation.mutate({
       email,
-      name,
+      firstName,
+      lastName,
+      repeatPassword,
       password,
     });
 
-    form.reset();
+    // form.reset();
   };
 
   return (
@@ -95,26 +121,44 @@ const Regist = () => {
           onSubmit={handleSubmit}
           sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
         >
-          <FieldInput
-            error={nameErrorMessage}
-            fieldName="name"
-            label="Email"
-            pHolder="Jone Snow"
-          />
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <FieldInput
+              error={nameErrorMessage}
+              fieldName="firstName"
+              label="Your first Name"
+              pHolder="Jone"
+            />
+            <FieldInput
+              error={nameErrorMessage}
+              fieldName="lastName"
+              label="Your last name"
+              pHolder="Snow"
+            />
+          </Stack>
 
           <FieldInput
             error={emailErrorMessage}
             fieldName="email"
-            label="Full name"
+            label="Email"
             pHolder="your@email.com"
           />
 
-          <FieldInput
-            error={passwordErrorMessage}
-            fieldName="password"
-            label="Password"
-            pHolder="••••••"
-          />
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <FieldInput
+              error={passwordErrorMessage}
+              fieldName="password"
+              label="Password"
+              pHolder="••••••"
+              type="password"
+            />
+            <FieldInput
+              error={passwordErrorMessage}
+              fieldName="repeatPassword"
+              label="Repeat Password"
+              pHolder="••••••"
+              type="password"
+            />
+          </Stack>
 
           <FormControlLabel
             control={<Checkbox value="allowExtraEmails" color="primary" />}

@@ -6,7 +6,7 @@ import { Box, Container } from '@mui/material';
 const Layout = () => {
   return (
     <Box
-      bgcolor="theme.background.paper"
+      bgcolor="theme.background"
       display="flex"
       flexDirection="column"
       minHeight="100vh"

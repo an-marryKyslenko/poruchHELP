@@ -41,6 +41,7 @@ export const getTheme = (mode: 'light' | 'dark') =>
             backgroundColor: '#90caf9',
           },
         },
+      },
       MuiButton: {
         styleOverrides: {
           root: {

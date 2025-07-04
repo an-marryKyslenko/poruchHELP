@@ -62,7 +62,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: '#3B82F6' }}>
+    <AppBar position="static" sx={{ bgcolor: 'theme.background.primary' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Logo />
@@ -129,7 +129,9 @@ function Header() {
             }}
           ></Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box
+            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}
+          >
             {pages.map(page => (
               <Button
                 to={page.path}

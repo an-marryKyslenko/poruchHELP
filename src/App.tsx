@@ -4,6 +4,7 @@ import Home from './modules/home/pages/Home/Home';
 import Login from './modules/auth/pages/Login/Login';
 import Regist from './modules/auth/pages/Regist/Regist';
 import Stories from './modules/stories/Stories';
+import AddStory from './modules/add-story/pages/AddStory';
 
 export const App = () => {
   return (
@@ -14,6 +15,7 @@ export const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="logup" element={<Regist />} />
           <Route path="stories" element={<Stories />} />
+          <Route path="add-story" element={<AddStory />} />
         </Route>
       </Routes>
     </>

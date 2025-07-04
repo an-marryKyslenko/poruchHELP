@@ -10,5 +10,5 @@ export const AuthContainer = styled(Stack)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   // alignContent: 'center',
-  ...theme
+  ...theme,
 }));

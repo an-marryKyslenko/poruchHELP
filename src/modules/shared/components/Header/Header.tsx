@@ -16,19 +16,20 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import { useColorMode } from '../../context/ColorModeContext';
-
-const pages = ['Stories', 'Blog', 'Add story'];
-const settings = ['Profile', 'Account', 'Logout'];
+import { useAuth } from '../../context/AuthContext';
+import { pages, settings } from '../../data/pages';
+import { PagePath, SettingsPath } from '../../types/pages';
 
 function Header() {
   const { mode, toggleColorMode } = useColorMode();
-  const [auth, setAuth] = useState(false);
+  const { isAuth, logout } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setAuth(event.target.checked);
@@ -42,17 +43,21 @@ function Header() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (path: PagePath) => {
+    if (path === 'add-story') {
+      navigate(path, { state: { backgroundLocation: location } });
+    }
+
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = (item: string) => {
+  const handleCloseUserMenu = (item: SettingsPath) => {
     setAnchorElUser(null);
-    if (item === 'Logout') {
-      setAuth(false);
+    if (item === 'logout') {
+      logout();
       navigate('login');
     } else {
-      navigate(item.toLowerCase());
+      navigate(item);
     }
   };
 
@@ -90,8 +95,17 @@ function Header() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map(page => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                <MenuItem
+                  key={page.path}
+                  onClick={() => handleCloseNavMenu(page.path)}
+                >
+                  <Typography
+                    component={Link}
+                    to={page.path}
+                    sx={{ textAlign: 'center' }}
+                  >
+                    {page.name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,13 +132,13 @@ function Header() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map(page => (
               <Button
-                to={page.toLowerCase()}
+                to={page.path}
                 component={Link}
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.path}
+                onClick={() => handleCloseNavMenu(page.path)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
@@ -133,7 +147,7 @@ function Header() {
             {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
 
-          {auth ? (
+          {isAuth ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -158,11 +172,11 @@ function Header() {
               >
                 {settings.map(setting => (
                   <MenuItem
-                    key={setting}
-                    onClick={() => handleCloseUserMenu(setting)}
+                    key={setting.path}
+                    onClick={() => handleCloseUserMenu(setting.path)}
                   >
                     <Typography sx={{ textAlign: 'center' }}>
-                      {setting}
+                      {setting.name}
                     </Typography>
                   </MenuItem>
                 ))}

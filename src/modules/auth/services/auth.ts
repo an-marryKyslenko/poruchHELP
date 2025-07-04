@@ -1,7 +1,8 @@
 import API from '../../shared/service/axios';
+import { User } from '../../shared/types/authTypes';
 import { NewUser, UserLogin } from '../types';
 
-const regist = async (userData: NewUser): Promise<unknown> => {
+const regist = async (userData: NewUser): Promise<User | null> => {
   const { data } = await API.post('/auth/registration', userData);
 
   return data;

@@ -12,17 +12,26 @@ import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
 import { Card } from '../../components/Card/Card';
 import { GoogleIcon } from '../../components/GoogleIcon/GoogleIcon';
 import FieldInput from '../../components/FieldInput/FieldInput';
-import { useMutation } from '@tanstack/react-query';
-import { authAPI } from '../../services/auth';
+// import { useMutation } from '@tanstack/react-query';
+// import { authAPI } from '../../services/auth';
+import { useAuth } from '../../../shared/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Regist = () => {
+  const { saveUser } = useAuth();
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [nameErrorMessage, setNameErrorMessage] = useState('');
-  const mutation = useMutation({
-    mutationFn: authAPI.regist,
-    onSuccess: () => {},
-  });
+  const navigate = useNavigate();
+
+  // const mutation = useMutation({
+  //   mutationFn: authAPI.regist,
+  //   onSuccess: (data) => {
+  //     if(data) {
+  //       saveUser(data)
+  //     }
+  //   },
+  // });
 
   const validateInputs = (
     firstName: string,
@@ -87,15 +96,16 @@ const Regist = () => {
       return;
     }
 
-    mutation.mutate({
-      email,
-      firstName,
-      lastName,
-      repeatPassword,
-      password,
-    });
+    const newUser = { email, firstName, lastName, password, repeatPassword };
 
-    // form.reset();
+    // mutation.mutate(newUser);
+    saveUser({ id: '1', ...newUser });
+
+    form.reset();
+
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   };
 
   return (

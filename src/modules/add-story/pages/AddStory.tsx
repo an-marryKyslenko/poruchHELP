@@ -26,7 +26,8 @@ const AddStory = () => {
     if (!isAuth) {
       setOpenModal(true);
     }
-  });
+  }, [isAuth]);
+
   const handleClose = () => {
     setOpenModal(false);
     navegate('/');
@@ -55,15 +56,10 @@ const AddStory = () => {
               You are not logged in. Please select a suitable login option.
             </Typography>
             <Stack spacing={2}>
-              <Button
-                to="/login"
-                fullWidth
-                component={Link}
-                variant="contained"
-              >
+              <Button to="./login" fullWidth component={Link} variant="contained">
                 Log in
               </Button>
-              <Button to="logup" component={Link} variant="contained">
+              <Button to="./logup" component={Link} variant="contained">
                 Log up
               </Button>
             </Stack>

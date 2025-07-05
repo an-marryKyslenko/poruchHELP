@@ -57,7 +57,7 @@ function Header() {
       logout();
       navigate('login');
     } else {
-      navigate(item);
+      navigate(`my/${item}`);
     }
   };
 
@@ -197,8 +197,8 @@ function Header() {
               >
                 Log in
               </Button>
-              <Button to="logup" component={Link} variant="contained">
-                Log up
+              <Button to="signup" component={Link} variant="contained">
+                Sign up
               </Button>
             </Box>
           )}

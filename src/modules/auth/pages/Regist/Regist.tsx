@@ -104,7 +104,7 @@ const Regist = () => {
     form.reset();
 
     setTimeout(() => {
-      navigate('/');
+      navigate('/stories');
     }, 2000);
   };
 

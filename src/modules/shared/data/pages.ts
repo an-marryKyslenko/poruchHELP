@@ -23,6 +23,14 @@ export const settings = [
     path: 'my-stories',
   },
   {
+    name: 'Activity',
+    path: 'activity',
+  },
+  {
+    name: 'Settings',
+    path: 'settings',
+  },
+  {
     name: 'Logout',
     path: 'logout',
   },

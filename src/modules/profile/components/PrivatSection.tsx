@@ -1,7 +1,6 @@
 import EditIcon from '@mui/icons-material/Edit';
 import RoleBadge from '../components/RoleBadge';
 import {
-  Avatar,
   Badge,
   Card,
   CardContent,
@@ -11,6 +10,7 @@ import {
 } from '@mui/material';
 import FieldRow from '../components/FieldRow';
 import { user } from '../services/data';
+import StyledAvatar from './StyledAvatar';
 
 type Props = {
   handleOpen: () => void;
@@ -40,21 +40,7 @@ const PrivatSection = ({ handleOpen }: Props) => {
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             badgeContent={<RoleBadge role={user.role} />}
           >
-            <Avatar
-              alt="Anna"
-              src={user.avatarUrl}
-              sx={{
-                width: 80,
-                height: 80,
-                border: '2px solid',
-                borderColor:
-                  user.role === 'admin'
-                    ? '#f44336'
-                    : user.role === 'ambassador'
-                      ? '#4caf50'
-                      : '#fff',
-              }}
-            />
+            <StyledAvatar alt="Anna" src={user.avatarUrl} role={user.role} />
           </Badge>
 
           <FieldRow

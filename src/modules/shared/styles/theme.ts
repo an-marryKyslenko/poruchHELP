@@ -1,7 +1,9 @@
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 
+const theme = createTheme();
+
 export const getTheme = (mode: 'light' | 'dark') =>
-  createTheme({
+  createTheme(theme, {
     palette: {
       mode,
       background: {
@@ -24,7 +26,27 @@ export const getTheme = (mode: 'light' | 'dark') =>
     },
     typography: {
       fontFamily: ['"Roboto"', 'sans-serif'].join(','),
-      h5: { fontWeight: 600, fontSize: '1.25rem' },
+      h2: {
+        fontWeight: 500,
+        fontSize: '1.8rem',
+        [theme.breakpoints.down('sm')]: {
+          fontSize: '1.65rem',
+        },
+      },
+      h3: {
+        fontWeight: 500,
+        fontSize: '1.4rem',
+        [theme.breakpoints.down('sm')]: {
+          fontSize: '1.15rem',
+        },
+      },
+      h5: {
+        fontWeight: 500,
+        fontSize: '1.25rem',
+        [theme.breakpoints.down('sm')]: {
+          fontSize: '1rem',
+        },
+      },
       body1: { fontSize: '1rem' },
       button: { textTransform: 'none', fontWeight: 500 },
     },

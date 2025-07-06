@@ -4,6 +4,7 @@ import { useState } from 'react';
 import PrivatSection from '../components/PrivatSection';
 import ContactSection from '../components/ContactSection';
 import EditorDrawer from '../components/EditorDrawer';
+import PrivateForm from '../components/PrivateForm';
 
 const Profile = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -13,8 +14,10 @@ const Profile = () => {
   };
 
   return (
-    <Stack spacing={2} mb={4}>
-      <Typography variant="h2">Profile</Typography>
+    <Stack spacing={2} mb={4} mt={2}>
+      <Typography variant="h2" mt={2} mb={2}>
+        Profile
+      </Typography>
 
       <PrivatSection handleOpen={handleOpenEditDrawer} />
       <ContactSection handleOpen={handleOpenEditDrawer} />
@@ -22,7 +25,9 @@ const Profile = () => {
       <EditorDrawer
         openDrawer={openDrawer}
         closeDrawer={() => setOpenDrawer(false)}
-      />
+      >
+        <PrivateForm />
+      </EditorDrawer>
     </Stack>
   );
 };

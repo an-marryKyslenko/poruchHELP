@@ -62,7 +62,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: 'theme.background.primary' }}>
+    <AppBar position="static" sx={{ bgcolor: 'theme.primary' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Logo />

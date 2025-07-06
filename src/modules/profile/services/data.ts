@@ -5,7 +5,7 @@ export const user: UserProfile = {
   lastName: 'Show',
   email: 'saro@gmail.com',
   phone: '+380969980440',
-  role: 'admin',
+  role: 'user',
   avatarUrl: '/images/user.jpg',
   id: '2',
   bio: 'Some long long bio',
